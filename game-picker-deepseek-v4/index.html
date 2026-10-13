@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f5f6f2" />
+  <title>玩点什么 — 今天的娱乐决定了</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="玩点什么首页"><span class="brand-mark">✳</span><span>玩点什么<span class="brand-dot">.</span></span></a>
+      <button id="language-toggle" class="language-toggle" type="button" aria-label="Switch language / 切换语言" aria-pressed="false">中文 / English</button><div class="top-note"><span class="live-dot"></span> 今天，玩得刚刚好</div>
+    </header>
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">YOUR MOMENT, YOUR GAME</p>
+          <h1>别再纠结了。<br><span>玩点什么？</span></h1>
+          <p class="hero-sub">告诉我你现在的状态，我来替你做决定。</p>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+          <div class="art-star star-a">✳</div><div class="art-star star-b">✦</div>
+          <div class="art-card"><span class="art-card-icon">🎮</span><span class="art-card-line"></span><span class="art-card-line short"></span><span class="art-card-chip">READY TO PLAY</span></div>
+          <span class="art-spark">✧</span>
+        </div>
+      </section>
+
+      <div class="content-grid">
+        <section class="planner panel" aria-labelledby="planner-title">
+          <div class="section-head"><div><p class="eyebrow">先告诉我</p><h2 id="planner-title">你现在的状态</h2></div><span class="step-count">01 <i>/</i> 04</span></div>
+          <div class="field-group slider-group">
+            <div class="slider-title"><div class="field-title"><span>⏱</span> 有多少时间？</div><strong id="time-value">30 分钟</strong></div>
+            <input id="time" type="range" min="10" max="240" step="5" value="30" aria-label="可用时间，分钟" />
+            <div class="range-labels"><span>10 分钟</span><span>最多 4 小时</span></div>
+          </div>
+          <div class="field-group">
+            <div class="field-title"><span>👥</span> 和谁一起？</div>
+            <div class="choice-row compact" data-group="players">
+              <button class="choice selected" data-value="solo">一个人</button><button class="choice" data-value="friends">和朋友</button><button class="choice" data-value="online">线上玩家</button>
+            </div>
+          </div>
+          <div class="field-group">
+            <div class="field-title"><span>🖥</span> 想用什么平台？</div>
+            <div class="choice-row compact" data-group="platform">
+              <button class="choice selected" data-value="pc">PC</button><button class="choice" data-value="mobile">手机</button><button class="choice" data-value="board">桌游</button>
+            </div>
+          </div>
+          <div class="field-group mood-group">
+            <div class="field-title"><span>☼</span> 今天想要什么感觉？<small>可多选</small></div>
+            <div class="mood-row" data-group="moods">
+              <button class="mood selected" data-value="relax">☁️ <span>放松</span></button>
+              <button class="mood" data-value="competitive">⚡ <span>竞争</span></button>
+              <button class="mood" data-value="explore">🧭 <span>探索</span></button>
+              <button class="mood" data-value="story">📖 <span>剧情</span></button>
+            </div>
+          </div>
+          <div class="field-group energy-group">
+            <div class="energy-label"><span>现在的精力</span><span><b id="energy-name">想躺平</b> · <i id="energy-value">20</i>/100</span></div>
+            <input id="energy" type="range" min="0" max="100" value="20" aria-label="现在的精力，0 到 100" />
+            <div class="range-labels"><span>想躺平</span><span>状态不错</span><span>精力满满</span></div>
+          </div>
+          <div class="agent-box">
+            <div class="agent-heading"><span class="agent-spark">✳</span><div><b>直接告诉我你的状态</b><small><span id="service-status">正在检查 AI 服务…</span></small></div></div>
+            <textarea id="agent-prompt" rows="2" maxlength="1000" placeholder="比如：喜欢解谜，不想有恐怖元素；也可以直接使用上面的筛选条件"></textarea>
+            <button class="agent-submit" id="agent-decide">理解并推荐 <span>↗</span></button>
+          </div>
+          <p id="request-error" class="request-error hidden" role="alert" data-no-translate></p><button class="decide-btn" id="decide"><span>帮我决定</span><span class="btn-arrow">↗</span></button>
+          <p class="privacy-note">AI 模式会发送筛选条件、描述及近期游戏名，记录保存在本机 <span>🔒</span></p>
+        </section>
+
+        <section class="result-column" aria-live="polite">
+          <div class="result-card panel" id="result-card">
+            <div class="empty-state" id="empty-state">
+              <div class="empty-illustration"><span class="empty-sun">☼</span><span class="empty-controller">⌁</span><span class="empty-star">✦</span></div>
+              <p class="eyebrow">YOUR NEXT GOOD TIME</p>
+              <h2>下一段快乐，<br>等你来开启。</h2>
+              <p>选好状态，剩下的交给我。<br>一个好选择，离你只有一步。</p>
+              <div class="empty-foot"><span>✳</span> 由 DeepSeek 现场挑选，不受预置游戏库限制</div>
+            </div>
+            <div class="recommendation hidden" id="recommendation" data-no-translate></div>
+          </div>
+          <details class="library panel"><summary>我的游戏库 <span id="library-count"></span></summary><p>推荐结果会加入游戏库，勾选即可标记拥有。此列表不会自动读取 Steam 账号。</p><input id="library-search" type="search" placeholder="搜索游戏名称" aria-label="搜索我的游戏库"><div id="library-list" data-no-translate></div></details><div class="history panel">
+            <div class="history-head"><div><p class="eyebrow">YOUR RECENT PLAYS</p><h3>最近玩过</h3></div><button class="clear-history" id="clear-history" title="清空历史记录">清空</button></div>
+            <div class="history-list" id="history-list" data-no-translate></div>
+          </div>
+        </section>
+      </div>
+      <footer><span>✳</span> MADE FOR YOUR FREE TIME <span class="footer-right">一个小小的决定，让今晚更好玩。</span></footer>
+    </main>
+  </div>
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
